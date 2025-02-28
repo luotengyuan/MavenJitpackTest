@@ -13,7 +13,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.lois.maven.test'
             artifactId = 'JarLib'
-            version = '1.0'
+            version = '1.3'
 
             afterEvaluate {
                 from components.java
