@@ -30,7 +30,7 @@ android {
             // 显式声明发布配置
             withSourcesJar()
             // doc发布需要添加"org.jetbrains.dokka:dokka-gradle-plugin:1.9.10"插件
-//            withJavadocJar()
+            withJavadocJar()
         }
     }
 }
