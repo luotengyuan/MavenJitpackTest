@@ -1,0 +1,59 @@
+plugins {
+    alias(libs.plugins.android.library)
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.lois.aarlib'
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 21
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    // 以下是本地构建配置，用于发布到maven仓库,显式声明发布配置（关键修复）
+    publishing {
+        singleVariant("release") {
+            // 显式声明发布配置
+            withSourcesJar()
+            // doc发布需要添加"org.jetbrains.dokka:dokka-gradle-plugin:1.9.10"插件
+//            withJavadocJar()
+        }
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.lois.maven.test'
+            artifactId = 'AarLib'
+            version = '1.0'
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}

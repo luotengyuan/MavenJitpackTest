@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MavenJitpackTest</string>
+    <string name="test_aar">Test Aar</string>
+    <string name="test_jar">Test Jar</string>
+</resources>
